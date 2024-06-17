@@ -30,7 +30,7 @@ public interface ProductMapper {
     void deleteProduct(Integer id);
 
     @Select("<script>" +
-            "SELECT * FROM product WHERE 1=1" +
+            "SELECT * FROM product WHERE 1=1 AND permission = 1" +
             "<if test='query != null and query != \"\"'>" +
             " AND (productName LIKE CONCAT('%', #{query}, '%')" +
             " OR productInformation LIKE CONCAT('%', #{query}, '%')" +
