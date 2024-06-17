@@ -6,15 +6,22 @@
     </div>
 
   <el-table :data="tableData">
-    <el-table-column prop="productName" label="照片名称" width="180"></el-table-column>
-    <el-table-column label="图像" width="380">
+    <el-table-column prop="productName" label="照片名称" width="150"></el-table-column>
+    <el-table-column label="图像" width="250">
       <template v-slot="scope">
         <img :src="scope.row.productImage" width="150px" />
       </template>
     </el-table-column>
     <el-table-column prop="productType" label="类型" width="140"></el-table-column>
-    <el-table-column prop="productInformation" label="基本信息" width="400"></el-table-column>
+    <el-table-column prop="productInformation" label="基本信息" width="380"></el-table-column>
     <el-table-column prop="productTimeStamp" label="最后修改时间" width="200"></el-table-column>
+    <el-table-column prop="location" label="地点" width="120"></el-table-column>
+    <el-table-column prop="permission" label="照片权限" width="100">
+      <template v-slot="scope">
+        <span v-if="scope.row.permission">公开</span>
+        <span v-else>私有</span>
+      </template>
+    </el-table-column>
     <el-table-column label="操作">
       <template v-slot="scope">
         <el-button type="primary" @click="editProduct(scope.row)">编辑</el-button>
@@ -37,6 +44,15 @@
         </el-form-item>
         <el-form-item label="基本信息" prop="productInformation">
           <el-input type="textarea" v-model="formData.productInformation"></el-input>
+        </el-form-item>
+        <el-form-item label="地点" prop="location">
+          <el-input v-model.number="formData.location"></el-input>
+        </el-form-item>
+        <el-form-item label="权限" prop="permission">
+          <el-radio-group v-model="formData.permission">
+            <el-radio :label="true">公开</el-radio>
+            <el-radio :label="false">私有</el-radio>
+          </el-radio-group>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -66,6 +82,8 @@ interface Product {
   productInformation: string;
   productType: string;
   productTimeStamp: string;
+  location: string;
+  permission: number;
 }
 
 const tableData = ref<Product[]>([]);
@@ -75,7 +93,9 @@ const formData = ref<Product>({
   productImage: '',
   productInformation: '',
   productType: '',
-  productTimeStamp:''
+  productTimeStamp:'',
+  location: '',
+  permission: 0,
 });
 const uploadDialogVisible = ref(false);
 const searchQuery = ref('');
@@ -87,7 +107,9 @@ const showUploadDialog = () => {
     productImage: '',
     productInformation: '',
     productType: '',
-    productTimeStamp:''
+    productTimeStamp:'',
+    location: '',
+    permission: 0,
   };
   uploadDialogVisible.value = true;
 };

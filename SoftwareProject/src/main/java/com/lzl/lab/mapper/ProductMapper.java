@@ -15,12 +15,12 @@ public interface ProductMapper {
 //    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
 //    void insertProduct(Product product,Long userId);
 
-    @Insert("INSERT INTO product (productName, productImage, productInformation, productType, userId, productTimeStamp) " +
-            "VALUES (#{product.productName}, #{product.productImage}, #{product.productInformation}, #{product.productType}, #{userId}, #{product.productTimeStamp})")
+    @Insert("INSERT INTO product (productName, productImage, productInformation, productType, userId, productTimeStamp, location, permission) " +
+            "VALUES (#{product.productName}, #{product.productImage}, #{product.productInformation}, #{product.productType}, #{userId}, #{product.productTimeStamp}, #{product.location}, #{product.permission})")
     @Options(useGeneratedKeys = true, keyProperty = "product.id", keyColumn = "id")
     void insertProduct(Product product, @Param("userId") Long userId);
 
-    @Update("UPDATE product SET productName = #{productName}, productImage = #{productImage}, productInformation = #{productInformation}, productType = #{productType}, productTimeStamp = #{productTimeStamp} WHERE Id = #{Id}")
+    @Update("UPDATE product SET productName = #{productName}, productImage = #{productImage}, productInformation = #{productInformation}, productType = #{productType}, productTimeStamp = #{productTimeStamp}, location = #{location}, permission = #{permission} WHERE Id = #{Id}")
     void updateProduct(Product product);
 
     @Delete("DELETE FROM product WHERE id = #{id}")

@@ -15,4 +15,6 @@ public class Product {
     private String productInformation;
     private String productType;
     private String productTimeStamp;
+    private String location;
+    private Boolean permission;
 }
