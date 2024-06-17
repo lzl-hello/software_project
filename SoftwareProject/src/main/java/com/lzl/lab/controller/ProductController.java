@@ -75,12 +75,17 @@ public class ProductController {
             return Result.success(productList);
         }
 
+        @GetMapping("/searchAllProducts")
+        public Result searchAllProducts(@RequestParam String query) {
+            System.out.println("搜索商品信息,条件：" + "condition:" + query);
+            List<Product> productList = productService.searchAllProducts(query);
+            return Result.success(productList);
+        }
 
-    @GetMapping("/searchAllProducts")
-    public Result searchAllProducts(@RequestParam String query) {
-        System.out.println("搜索商品信息,条件：" + "condition:" + query);
-        List<Product> productList = productService.searchAllProducts(query);
-        return Result.success(productList);
-    }
-
+        @GetMapping("/albumInfo")
+        public Result listForAlbum(@RequestParam Long userId, @RequestParam String productType){
+            System.out.println("获取相册信息信息");
+            List<Product> productList = productService.listForAlbum(userId, productType);
+            return Result.success(productList);
+        }
 }
