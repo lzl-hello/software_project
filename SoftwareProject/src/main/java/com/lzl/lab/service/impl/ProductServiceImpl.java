@@ -57,6 +57,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> listForAlbum(Long userId, String productType) {
-        return productMapper.list1(userId);
+        return productMapper.listForAlbum(userId, productType);
     }
 }

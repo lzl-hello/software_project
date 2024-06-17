@@ -59,7 +59,7 @@
   
   const fetchProducts = () => {
     // axios.get('/api/product1')
-    axios.get('/api/albumInfo', { params: { userId: userId ,productType: "人物" }})
+    axios.get('/api/albumInfo', { params: { userId: userId ,productType: "建筑" }})
     .then((result) => {
       tableData.value = result.data.data;
     });

@@ -2,42 +2,42 @@
     <nav class="nav">
       <router-link :to="{ name: '/productperson', params: { userId: userId } }" class="nav-block">
         <div class="block-content" style="background-image: url('../../picture/person.jpg');">
-          <h2>分类一</h2>
+          <h2>人物照</h2>
           <p>Go to Page 1</p>
         </div>
       </router-link>
   
-      <router-link :to="{ name: '/product', params: { userId: userId } }" class="nav-block">
-        <div class="block-content" style="background-image: url('../../picture/person.jpg');">
-          <h2>分类二</h2>
+      <router-link :to="{ name: '/productscenery', params: { userId: userId } }" class="nav-block">
+        <div class="block-content" style="background-image: url('../../picture/scenery.jpg');">
+          <h2>风景照</h2>
           <p>Go to Page 2</p>
         </div>
       </router-link>
   
-      <router-link :to="{ name: '/product', params: { userId: userId } }" class="nav-block">
-        <div class="block-content" style="background-image: url('../../picture/person.jpg');">
-          <h2>分类三</h2>
+      <router-link :to="{ name: '/productanimal', params: { userId: userId } }" class="nav-block">
+        <div class="block-content" style="background-image: url('../../picture/animal.jpg');">
+          <h2>动物照</h2>
           <p>Go to Page 3</p>
         </div>
       </router-link>
   
-      <router-link :to="{ name: '/product', params: { userId: userId } }" class="nav-block">
-        <div class="block-content" style="background-image: url('../../picture/person.jpg');">
-          <h2>分类四</h2>
+      <router-link :to="{ name: '/productevent', params: { userId: userId } }" class="nav-block">
+        <div class="block-content" style="background-image: url('../../picture/event.jpg');">
+          <h2>事件</h2>
           <p>Go to Page 4</p>
         </div>
       </router-link>
 
-      <router-link :to="{ name: '/product', params: { userId: userId } }" class="nav-block">
-        <div class="block-content" style="background-image: url('../../picture/person.jpg');">
-          <h2>分类五</h2>
+      <router-link :to="{ name: '/productbuilding', params: { userId: userId } }" class="nav-block">
+        <div class="block-content" style="background-image: url('../../picture/building.jpg');">
+          <h2>建筑</h2>
           <p>Go to Page 5</p>
         </div>
       </router-link>
 
-      <router-link :to="{ name: '/product', params: { userId: userId } }" class="nav-block">
-        <div class="block-content" style="background-image: url('../../picture/person.jpg');">
-          <h2>分类六</h2>
+      <router-link :to="{ name: '/productother', params: { userId: userId } }" class="nav-block">
+        <div class="block-content" style="background-image: url('../../picture/other.jpg');">
+          <h2>其他</h2>
           <p>Go to Page 6</p>
         </div>
       </router-link>
