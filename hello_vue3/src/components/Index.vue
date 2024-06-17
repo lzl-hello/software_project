@@ -26,6 +26,13 @@
                 </div>
             </a>
 
+            <router-link :to="{ name: '/productclassify', params: { userId: userId } }" class="nav-block">
+                <div class="block-content">
+                    <h2>智能相册管理</h2>
+                    <p>Go to Page 4</p>
+                </div>
+            </router-link>
+
         </nav>
 
         <main class="main-content">

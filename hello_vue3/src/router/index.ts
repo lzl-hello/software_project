@@ -6,6 +6,8 @@ import login from '@/components/Login.vue'
 import register from '@/components/Register.vue'
 import index from '@/components/Index.vue'  
 import openproduct from '@/components/OpenProduct.vue'
+import productclassify from '@/components/ProductClassify.vue'
+import productperson from '@/components/ProductPerson.vue'
 
 
 // 第二步：创建路由器
@@ -20,6 +22,16 @@ const router = createRouter({
     {
       path:'/openproduct',
       component:openproduct
+    },
+    {
+      path:'/productclassify/:userId',
+      name:'/productclassify',
+      component:productclassify
+    },
+    {
+      path:'/productperson/:userId',
+      name:'/productperson',
+      component:productperson
     },
     {
       path:'/login',
