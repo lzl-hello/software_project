@@ -15,9 +15,16 @@
             <router-link :to="'/openproduct'" class="nav-block">
                 <div class="block-content">
                     <h2>欣赏其余用户公开的照片</h2>
-                    <p>Go to Page 1</p>
+                    <p>Go to Page 2</p>
                 </div>
             </router-link>
+
+            <a href="http://localhost:9095/index.html#/aj/mqDNhXss" target="_blank" class="nav-block">
+                <div class="block-content">
+                    <h2>查看您的照片统计</h2>
+                    <p>Go to Page 3</p>
+                </div>
+            </a>
 
         </nav>
 
