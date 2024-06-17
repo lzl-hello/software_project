@@ -18,4 +18,6 @@ public interface ProductService {
     List<Product> searchProducts(Long userId,String query);
 
     List<Product> searchAllProducts(String query);
+
+    List<Product> listForAlbum(Long userId, String productType);
 }
