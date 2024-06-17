@@ -13,7 +13,8 @@
       </template>
     </el-table-column>
     <el-table-column prop="productType" label="类型" width="140"></el-table-column>
-    <el-table-column prop="productInformation" label="基本信息" width="440"></el-table-column>
+    <el-table-column prop="productInformation" label="基本信息" width="400"></el-table-column>
+    <el-table-column prop="productTimeStamp" label="最后修改时间" width="200"></el-table-column>
     <el-table-column label="操作">
       <template v-slot="scope">
         <el-button type="primary" @click="editProduct(scope.row)">编辑</el-button>
@@ -23,12 +24,12 @@
   </el-table>
 
   <div>
-    <el-dialog v-model="uploadDialogVisible" title="上传商品" :center="true">
+    <el-dialog v-model="uploadDialogVisible" title="修改照片" :center="true">
       <el-form :model="formData" label-width="100px">
-        <el-form-item label="商品名称" prop="productName">
+        <el-form-item label="图片名称" prop="productName">
           <el-input v-model="formData.productName"></el-input>
         </el-form-item>
-        <el-form-item label="类型" prop="productType">
+        <el-form-item label="类型描述" prop="productType">
           <el-input v-model.number="formData.productType"></el-input>
         </el-form-item>
         <el-form-item label="图片" prop="productImage">
@@ -47,10 +48,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import axios from 'axios';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import { useRoute } from 'vue-router';
+import moment from 'moment';
+
 
 const route = useRoute();
 const userId = route.params.userId;
@@ -62,6 +65,7 @@ interface Product {
   productImage: string;
   productInformation: string;
   productType: string;
+  productTimeStamp: string;
 }
 
 const tableData = ref<Product[]>([]);
@@ -70,7 +74,8 @@ const formData = ref<Product>({
   productName: '',
   productImage: '',
   productInformation: '',
-  productType: ''
+  productType: '',
+  productTimeStamp:''
 });
 const uploadDialogVisible = ref(false);
 const searchQuery = ref('');
@@ -81,7 +86,8 @@ const showUploadDialog = () => {
     productName: '',
     productImage: '',
     productInformation: '',
-    productType: ''
+    productType: '',
+    productTimeStamp:''
   };
   uploadDialogVisible.value = true;
 };
@@ -104,6 +110,9 @@ const fetchProducts = () => {
 };
 
 const submitForm = () => {
+  // 将格式化后的时间戳字符串添加到表单数据中
+  const currentTime = moment().format('YYYY-MM-DD HH:mm:ss');
+  formData.value.productTimeStamp = currentTime;
   if (formData.value.id) {
     // 更新产品
     axios.post('/api/updateProduct', formData.value)

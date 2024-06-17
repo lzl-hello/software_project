@@ -14,4 +14,5 @@ public class Product {
     private String productImage;
     private String productInformation;
     private String productType;
+    private String productTimeStamp;
 }

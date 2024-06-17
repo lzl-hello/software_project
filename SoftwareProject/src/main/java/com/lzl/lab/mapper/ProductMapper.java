@@ -15,12 +15,12 @@ public interface ProductMapper {
 //    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
 //    void insertProduct(Product product,Long userId);
 
-    @Insert("INSERT INTO product (productName, productImage, productInformation, productType, userId) " +
-            "VALUES (#{product.productName}, #{product.productImage}, #{product.productInformation}, #{product.productType}, #{userId})")
+    @Insert("INSERT INTO product (productName, productImage, productInformation, productType, userId, productTimeStamp) " +
+            "VALUES (#{product.productName}, #{product.productImage}, #{product.productInformation}, #{product.productType}, #{userId}, #{product.productTimeStamp})")
     @Options(useGeneratedKeys = true, keyProperty = "product.id", keyColumn = "id")
     void insertProduct(Product product, @Param("userId") Long userId);
 
-    @Update("UPDATE product SET productName = #{productName}, productImage = #{productImage}, productInformation = #{productInformation}, productType = #{productType} WHERE Id = #{Id}")
+    @Update("UPDATE product SET productName = #{productName}, productImage = #{productImage}, productInformation = #{productInformation}, productType = #{productType}, productTimeStamp = #{productTimeStamp} WHERE Id = #{Id}")
     void updateProduct(Product product);
 
     @Delete("DELETE FROM product WHERE id = #{id}")
@@ -32,6 +32,7 @@ public interface ProductMapper {
             " AND (productName LIKE CONCAT('%', #{query}, '%')" +
             " OR productInformation LIKE CONCAT('%', #{query}, '%')" +
             " OR productType LIKE CONCAT('%', #{query}, '%'))" +
+            " OR DATE_FORMAT(productTimeStamp, '%Y-%m-%d %H:%i:%s') LIKE CONCAT('%', #{query}, '%')" +
             "</if>" +
             " AND userId = #{userId}" +  // 添加查询当前用户的条件
             "</script>")
