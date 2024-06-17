@@ -65,17 +65,15 @@
     });
   };
   
-
-  
-//   const searchProducts = () => {
-//     axios.get('/api/searchProducts', { params: { userId:userId, query: searchQuery.value } })
-//       .then(response => {
-//         tableData.value = response.data.data;
-//       })
-//       .catch(error => {
-//         console.error('搜索失败:', error);
-//       });
-//   };
+  const searchProducts = () => {
+    axios.get('/api/searchAllProducts', { params: { query: searchQuery.value } })
+      .then(response => {
+        tableData.value = response.data.data;
+      })
+      .catch(error => {
+        console.error('搜索失败:', error);
+      });
+  };
   
   </script>
   
