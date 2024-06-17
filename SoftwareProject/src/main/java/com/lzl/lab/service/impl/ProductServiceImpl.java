@@ -20,6 +20,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Product> list2() { return productMapper.list2(); }
+
+    @Override
     public void insertProduct(Product product,Long userId) throws Exception {
 //        productMapper.insertProduct(product,userId);
         try {

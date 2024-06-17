@@ -18,7 +18,14 @@ public class ProductController {
         public Result list1(@RequestParam Long userId){
             System.out.println("查询商品信息");
             List<Product> productList = productService.list1(userId);
+            return Result.success(productList);
+        }
 
+        @GetMapping("/productAll")
+        public Result list2(){
+            System.out.println("查询全部信息");
+            List<Product> productList = productService.list2();
+            // List<Product> productList = productService.list1(userId);
             return Result.success(productList);
         }
 

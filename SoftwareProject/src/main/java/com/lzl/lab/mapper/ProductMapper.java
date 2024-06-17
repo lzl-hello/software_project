@@ -10,6 +10,9 @@ public interface ProductMapper {
     @Select("select * from product where userId = #{userId}")
     List<Product> list1(Long userId);
 
+    @Select("select * from product where permission = 1")
+    List<Product> list2();
+
 //    @Insert("INSERT INTO product (productName, productImage, productInformation, productType,userId) " +
 //            "VALUES (#{productName}, #{productImage}, #{productInformation}, #{productType}, #{userId})")
 //    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
