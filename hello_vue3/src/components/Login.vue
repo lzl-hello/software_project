@@ -47,12 +47,12 @@ const handleSubmit = () => {
     .then(response => {
       // 处理登录成功逻辑
       console.log(response.data.data)
-      ElMessage.success('登录成功');
+      // ElMessage.success('登录成功');
 
       const user = response.data.data; // 获取返回的用户信息
       const userId = user.userId; // 获取用户的 id
       console.log(userId); // 打印用户的 id
-
+      ElMessage.success('登录成功');
       // router.push('/product');
       // router.push({ name: '/product', params: { userId: userId } })
       router.push({ name: '/index', params: { userId: userId } })
