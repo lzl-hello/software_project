@@ -14,7 +14,7 @@ public interface ProductMapper {
     List<Product> list2();
 
     @Select("select * from product where userId = #{userId} AND productType = #{productType}")
-    List<Product> listForAlbum();
+    List<Product> listForAlbum(Long userId, String productType);
 
 
 //    @Insert("INSERT INTO product (productName, productImage, productInformation, productType,userId) " +
