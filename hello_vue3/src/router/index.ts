@@ -4,6 +4,8 @@ import {createRouter,createWebHistory} from 'vue-router'
 import product from '@/components/ProductInfo.vue'
 import login from '@/components/Login.vue'
 import register from '@/components/Register.vue'
+import index from '@/components/Index.vue'  
+
 
 // 第二步：创建路由器
 const router = createRouter({
@@ -19,8 +21,13 @@ const router = createRouter({
       component:login
     },
     {
+      path:'/index/:userId',
+      name:'/index',
+      component:index
+    },
+    {
         path:'/',
-        component:login
+        component:index
       },
     {
       path:'/register',
