@@ -19,4 +19,14 @@ public class UserServiceImpl implements UserService {
     public User login(User user) {
         return userMapper.login(user);
     }
+
+    @Override
+    public User getUserById(Long id) {
+        return userMapper.getUserById(id);
+    }
+
+    @Override
+    public void updateUser(Long userId,String username,String phonenumber,String newPassword) {
+        userMapper.updateUser(userId,username,phonenumber,newPassword);
+    }
 }

@@ -4,9 +4,7 @@ import com.lzl.lab.pojo.Result;
 import com.lzl.lab.pojo.User;
 import com.lzl.lab.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserController {
@@ -41,5 +39,25 @@ public class UserController {
         } else {
             return Result.error("登录失败");
         }
+    }
+
+    @GetMapping ("/getUserById")
+    public Result getUserById(@RequestParam Long userId) {
+        System.out.println("获取用户信息：");
+        System.out.println(userId);
+        User u = userService.getUserById(userId);
+        if (u != null) {
+            return Result.success("获取用户信息成功", u);
+        } else {
+            return Result.error("获取用户信息失败");
+        }
+    }
+
+    @PutMapping ("/updateUser")
+    public Result updateUser(@RequestParam Long userId, @RequestParam String username,@RequestParam String phonenumber, @RequestParam String newPassword){
+        System.out.println("更新用户信息：");
+
+        userService.updateUser(userId,username,phonenumber,newPassword);
+        return Result.success("更新用户信息成功");
     }
 }

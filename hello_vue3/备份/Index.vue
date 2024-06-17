@@ -32,14 +32,6 @@
                     <p>Go to Page 4</p>
                 </div>
             </router-link>
-            
-            <!-- 添加新的按钮 -->
-            <router-link :to="{ name: '/editprofile', params: { userId: userId } }" class="nav-block">
-                <div class="block-content">
-                    <h2>修改我的个人信息</h2>
-                    <p>Edit My Profile</p>
-                </div>
-            </router-link>
 
         </nav>
 
@@ -50,12 +42,15 @@
 </template>
 
 <script setup lang="ts">
+
 import { defineComponent, computed } from 'vue';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
 const userId = route.params.userId;
 console.log(userId)
+
+
 </script>
 
 <style scoped>
@@ -80,7 +75,6 @@ console.log(userId)
 .nav {
     display: flex;
     justify-content: center;
-    flex-wrap: wrap; /* 修改为可换行布局 */
     gap: 20px;
     margin-bottom: 40px;
 }

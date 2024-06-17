@@ -13,6 +13,7 @@ import productanimal from '@/components/ProductAnimal.vue'
 import productbuilding from '@/components/ProductBuilding.vue'
 import productevent from '@/components/ProductEvent.vue'
 import productother from '@/components/ProductOther.vue'
+import editprofile from '@/components/EditProfile.vue'
 
 
 // 第二步：创建路由器
@@ -79,6 +80,11 @@ const router = createRouter({
     {
       path:'/register',
       component:register
+    },
+    {
+      path:'/editprofile/:userId',
+      name:'/editprofile',
+      component:editprofile
     },
   ]
 })
