@@ -27,7 +27,7 @@ const router = createRouter({
     },
     {
         path:'/',
-        component:index
+        component:login
       },
     {
       path:'/register',
