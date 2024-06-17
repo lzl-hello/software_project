@@ -12,9 +12,9 @@
                 </div>
             </router-link>
 
-            <router-link :to="{ name: '/product', params: { userId: userId } }" class="nav-block">
+            <router-link :to="'/openproduct'" class="nav-block">
                 <div class="block-content">
-                    <h2>Page 1</h2>
+                    <h2>欣赏其余用户公开的照片</h2>
                     <p>Go to Page 1</p>
                 </div>
             </router-link>
