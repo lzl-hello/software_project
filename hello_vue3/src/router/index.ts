@@ -6,6 +6,13 @@ import login from '@/components/Login.vue'
 import register from '@/components/Register.vue'
 import index from '@/components/Index.vue'  
 import openproduct from '@/components/OpenProduct.vue'
+import productclassify from '@/components/ProductClassify.vue'
+import productperson from '@/components/ProductPerson.vue'
+import productscenery from '@/components/ProductScenery.vue'
+import productanimal from '@/components/ProductAnimal.vue'
+import productbuilding from '@/components/ProductBuilding.vue'
+import productevent from '@/components/ProductEvent.vue'
+import productother from '@/components/ProductOther.vue'
 
 
 // 第二步：创建路由器
@@ -20,6 +27,41 @@ const router = createRouter({
     {
       path:'/openproduct',
       component:openproduct
+    },
+    {
+      path:'/productclassify/:userId',
+      name:'/productclassify',
+      component:productclassify
+    },
+    {
+      path:'/productscenery/:userId',
+      name:'/productscenery',
+      component:productscenery
+    },
+    {
+      path:'/productanimal/:userId',
+      name:'/productanimal',
+      component:productanimal
+    },
+    {
+      path:'/productbuilding/:userId',
+      name:'/productbuilding',
+      component:productbuilding
+    },
+    {
+      path:'/productevent/:userId',
+      name:'/productevent',
+      component:productevent
+    },
+    {
+      path:'/productother/:userId',
+      name:'/productother',
+      component:productother
+    },
+    {
+      path:'/productperson/:userId',
+      name:'/productperson',
+      component:productperson
     },
     {
       path:'/login',

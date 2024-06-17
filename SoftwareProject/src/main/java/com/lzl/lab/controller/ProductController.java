@@ -85,6 +85,10 @@ public class ProductController {
         @GetMapping("/albumInfo")
         public Result listForAlbum(@RequestParam Long userId, @RequestParam String productType){
             System.out.println("获取相册信息信息");
+            int id = userId.intValue();
+            System.out.println(id);
+            String productType1 = productType;
+            System.out.println(productType1);
             List<Product> productList = productService.listForAlbum(userId, productType);
             return Result.success(productList);
         }
