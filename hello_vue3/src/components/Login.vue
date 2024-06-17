@@ -54,7 +54,8 @@ const handleSubmit = () => {
       console.log(userId); // 打印用户的 id
 
       // router.push('/product');
-      router.push({ name: '/product', params: { userId: userId } })
+      // router.push({ name: '/product', params: { userId: userId } })
+      router.push({ name: '/index', params: { userId: userId } })
 
     })
     .catch(error => {
