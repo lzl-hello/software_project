@@ -50,4 +50,9 @@ public class ProductServiceImpl implements ProductService {
         return productMapper.searchProducts(userId,query);
     }
 
+
+    @Override
+    public List<Product> searchAllProducts(String query) {
+        return productMapper.searchAllProducts(query);
+    }
 }

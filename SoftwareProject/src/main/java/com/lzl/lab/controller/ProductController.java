@@ -75,4 +75,12 @@ public class ProductController {
             return Result.success(productList);
         }
 
+
+    @GetMapping("/searchAllProducts")
+    public Result searchAllProducts(@RequestParam String query) {
+        System.out.println("搜索商品信息,条件：" + "condition:" + query);
+        List<Product> productList = productService.searchAllProducts(query);
+        return Result.success(productList);
+    }
+
 }
