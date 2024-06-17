@@ -1,6 +1,10 @@
 <template>
   <div class="app">
-    <h2 class="title">照片管理系统</h2>
+    <!-- TODO: Add a router-link to index -->
+    <router-link to="/index/12">
+      <h2 class="title">照片管理系统</h2>
+    </router-link>
+    <!-- <h2 class="title">照片管理系统</h2> -->
     
     <div class="main-content">
       <RouterView></RouterView>
