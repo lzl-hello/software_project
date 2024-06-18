@@ -42,10 +42,6 @@
             </router-link>
 
         </nav>
-
-        <main class="main-content">
-            这个是index页面
-        </main>
     </div>
 </template>
 
@@ -65,16 +61,19 @@ console.log(userId)
     align-items: center;
     justify-content: flex-start; /* 改为 flex-start */
     height: 100vh;
-    background-color: #f5f5f5;
+    /* background-color: #f5f5f5; */
     font-family: Arial, sans-serif;
     text-align: center;
     padding: 20px;
     box-sizing: border-box;
+    /* opacity: 0.5; */
 }
 
 .header {
     margin-bottom: 20px;
     margin-top: 40px; /* 增加顶部外边距 */
+    /* 设置文字颜色 */
+    color: white;
 }
 
 .nav {
@@ -107,7 +106,5 @@ console.log(userId)
     text-align: center;
 }
 
-.main-content {
-    font-size: 18px;
-}
+
 </style>

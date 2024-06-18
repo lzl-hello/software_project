@@ -72,6 +72,7 @@ const handleSubmit = () => {
 .user-login {
   max-width: 400px;
   margin: 0 auto;
+  color: white;
 }
 .button-container {
   text-align: center;

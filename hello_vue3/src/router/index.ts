@@ -14,6 +14,7 @@ import productbuilding from '@/components/ProductBuilding.vue'
 import productevent from '@/components/ProductEvent.vue'
 import productother from '@/components/ProductOther.vue'
 import editprofile from '@/components/EditProfile.vue'
+import home from '@/components/Home.vue'
 
 
 // 第二步：创建路由器
@@ -74,8 +75,12 @@ const router = createRouter({
       component:index
     },
     {
+      path:'/home',
+      component:home
+    },
+    {
         path:'/',
-        component:login
+        component:home
       },
     {
       path:'/register',
