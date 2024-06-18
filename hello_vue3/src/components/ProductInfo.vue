@@ -12,6 +12,8 @@
         <img :src="scope.row.productImage" width="150px" />
       </template>
     </el-table-column>
+
+
     <el-table-column prop="productType" label="类型" width="140"></el-table-column>
     <el-table-column prop="productInformation" label="基本信息" width="380"></el-table-column>
     <el-table-column prop="productTimeStamp" label="最后修改时间" width="200" sortable></el-table-column>
@@ -49,6 +51,19 @@
         <el-form-item label="图片" prop="productImage">
           <el-input v-model="formData.productImage"></el-input>
         </el-form-item>
+
+        <el-form-item label="图片上传">
+          <el-upload
+            action="/api/upload"
+            list-type="picture"
+            :on-success="handleUploadSuccess"
+            :auto-upload="true"
+          >
+            <el-button type="primary">选择并上传图片</el-button>
+          </el-upload>
+        </el-form-item>
+
+
         <el-form-item label="基本信息" prop="productInformation">
           <el-input type="textarea" v-model="formData.productInformation"></el-input>
         </el-form-item>
@@ -124,6 +139,7 @@ const showUploadDialog = () => {
 const hideUploadDialog = () => {
   uploadDialogVisible.value = false;
 };
+
 
 onMounted(() => {
   fetchProducts();
@@ -244,6 +260,10 @@ const handleSortChange = (sortInfo: { prop: string; order: string }) => {
   }
 };
 
+const handleUploadSuccess = (response: any) => {
+  formData.value.productImage = response.url; // 将返回的URL存储到表单数据中
+  ElMessage.success('图片上传成功');
+};
 
 </script>
 

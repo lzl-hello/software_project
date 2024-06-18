@@ -5,6 +5,20 @@ import com.lzl.lab.pojo.Result;
 import com.lzl.lab.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Collections;
 
 import java.util.List;
 
@@ -27,6 +41,32 @@ public class ProductController {
             List<Product> productList = productService.list2();
             // List<Product> productList = productService.list1(userId);
             return Result.success(productList);
+        }
+
+
+        @Value("${file.upload-dir}")
+        private String uploadDir;
+
+        @PostMapping("/upload")
+        public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file) {
+            System.out.println("上传照片");
+            if (file.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("文件不能为空");
+            }
+
+            try {
+                // 生成唯一文件名
+                String fileName = System.currentTimeMillis() + "-" + file.getOriginalFilename();
+                Path filePath = Paths.get(uploadDir, fileName);
+                Files.copy(file.getInputStream(), filePath);
+
+                // 构建完整的文件URL
+                String fileUrl = "http://localhost:7070/picture/" + fileName;
+                System.out.println(fileUrl);
+                return ResponseEntity.ok().body(Collections.singletonMap("url", fileUrl));
+            } catch (IOException e) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("文件上传失败");
+            }
         }
 
         @PostMapping("/submitFormData")
