@@ -80,7 +80,7 @@ const router = createRouter({
     },
     {
         path:'/',
-        component:home
+        component:login
       },
     {
       path:'/register',

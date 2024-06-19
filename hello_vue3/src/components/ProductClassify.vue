@@ -1,4 +1,12 @@
 <template>
+      <header class="header">
+        <router-link to="/index/12" class="title-container">
+          <h2 class="title">照片管理系统</h2>
+        </router-link>
+      </header>
+      <!-- 空一行 -->
+      <br>
+      <br>
     <nav class="nav">
       <router-link :to="{ name: '/productperson', params: { userId: userId } }" class="nav-block">
         <div class="block-content" style="background-image: url('../../picture/person.jpg');">
@@ -65,8 +73,8 @@
   }
   
   .block-content {
-    height: 300px;
-    padding: 20px;
+    height: 400px;
+    padding: 40px;
     color: white; /* 根据背景图片调整文字颜色 */
     background-size: cover;
     background-position: center;

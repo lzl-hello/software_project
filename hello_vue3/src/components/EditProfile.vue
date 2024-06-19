@@ -1,147 +1,231 @@
 <template>
-    <div class="container">
+    <div id="edit-profile">
+      <div id="contain">
         <header class="header">
-            <h1>修改个人信息</h1>
+          <router-link to="/index/12" class="title-container">
+            <h2 class="title">照片管理系统</h2>
+          </router-link>
         </header>
-
-        <form @submit.prevent="submitForm" class="form">
-            <div class="form-group">
-                <label for="username">用户名</label>
-                <input type="text" id="username" v-model="user.username" required />
-            </div>
-
-            <div class="form-group">
-                <label for="phonenumber">电话号码</label>
-                <input type="tel" id="phonenumber" v-model="user.phonenumber" required />
-            </div>
-
-            <div class="form-group">
-                <label for="oldPassword">旧密码</label>
-                <input type="password" id="oldPassword" v-model="oldPassword" required />
-            </div>
-
-            <div class="form-group">
-                <label for="newPassword">新密码</label>
-                <input type="password" id="newPassword" v-model="newPassword" required />
-            </div>
-
-            <button type="submit" class="submit-button">保存更改</button>`
-        </form>
+        <div id="content">
+          <div id="left_card">
+            <h1>修改个人信息</h1>
+          </div>
+          <div id="right_card">
+            <el-card class="el-card">
+              <el-form @submit.prevent="submitForm" class="form">
+                <el-form-item class="form-item" label="用户名" prop="username" label-width="80px">
+                  <el-input type="text" id="username" v-model="user.username" required placeholder="请输入用户名"></el-input>
+                </el-form-item>
+                <el-form-item class="form-item" label="电话号码" prop="phonenumber" label-width="80px">
+                  <el-input type="tel" id="phonenumber" v-model="user.phonenumber" required placeholder="请输入电话号码"></el-input>
+                </el-form-item>
+                <el-form-item class="form-item" label="旧密码" prop="oldPassword" label-width="80px">
+                  <el-input type="password" id="oldPassword" v-model="oldPassword" required placeholder="请输入旧密码"></el-input>
+                </el-form-item>
+                <el-form-item class="form-item" label="新密码" prop="newPassword" label-width="80px">
+                  <el-input type="password" id="newPassword" v-model="newPassword" required placeholder="请输入新密码"></el-input>
+                </el-form-item>
+                <el-form class="button-row">
+                  <el-form-item>
+                    <el-button type="primary" class="submit-button" @click="submitForm">保存更改</el-button>
+                  </el-form-item>
+                </el-form>
+              </el-form>
+            </el-card>
+          </div>
+        </div>
+      </div>
     </div>
-</template>
-
-<script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
-import axios from 'axios';
-import { pa } from 'element-plus/es/locales.mjs';
-
-const route = useRoute();
-const router = useRouter();
-const userId = route.params.userId;
-
-const user = ref({
-  username: '',
-  phonenumber: '',
-  password: ''
-});
-
-const oldPassword = ref('');
-const newPassword = ref('');
-
-onMounted(async () => {
-    try {
-        axios.get('/api/getUserById', { params: { userId: userId } })
-        .then((result) => {
-            user.value = result.data.data;
-    });
-    } catch (error) {
-        console.error('Error fetching user data:', error);
+  </template>
+  
+  <script setup lang="ts">
+  import { ref, onMounted } from 'vue';
+  import { useRoute, useRouter } from 'vue-router';
+  import axios from 'axios';
+  import { ElMessage } from 'element-plus';
+  
+  const route = useRoute();
+  const router = useRouter();
+  const userId = route.params.userId;
+  
+  const user = ref({
+    username: '',
+    phonenumber: '',
+    password: ''
+  });
+  
+  const oldPassword = ref('');
+  const newPassword = ref('');
+  
+  onMounted(async () => {
+      try {
+          axios.get('/api/getUserById', { params: { userId: userId } })
+          .then((result) => {
+              user.value = result.data.data;
+      });
+      } catch (error) {
+          console.error('Error fetching user data:', error);
+      }
+  });
+  
+  const submitForm = async () => {
+      try {
+          if (oldPassword.value !== user.value.password) {
+              ElMessage.error('旧密码错误');
+              return;
+          }
+          await axios.put(`/api/updateUser`, null, {
+              params: {
+                  userId: userId,
+                  username: user.value.username,
+                  phonenumber: user.value.phonenumber,
+                  newPassword: newPassword.value
+              }
+          });
+  
+          ElMessage.success('个人信息已更新');
+          router.push('/');
+      } catch (error) {
+          console.error('Error updating user data:', error);
+          ElMessage.error('更新失败，请重试');
+      }
+  };
+  </script>
+  
+  <style lang="less" scoped>
+  @keyframes animate {
+    0% {
+      filter: hue-rotate(0deg);
     }
-});
-
-
-const submitForm = async () => {
-    try {
-        if (oldPassword.value !== user.value.password) {
-            alert('旧密码错误');
-            return;
-        }
-        await axios.put(`/api/updateUser`, null, {
-            params: {
-                userId: userId,
-                username: user.value.username,
-                phonenumber: user.value.phonenumber,
-                newPassword: newPassword.value
-            }
-        });
-
-        alert('个人信息已更新');
-        router.push('/');
-    } catch (error) {
-        console.error('Error updating user data:', error);
-        alert('更新失败，请重试');
+    100% {
+      filter: hue-rotate(360deg);
     }
-};
-</script>
-
-<style scoped>
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start; /* 让容器内的内容从顶部开始排列 */
+  }
+  
+  #edit-profile {
+    position: relative;
+    width: 100vw;
     height: 100vh;
-    background-color: #f5f5f5;
-    font-family: Arial, sans-serif;
-    padding: 20px;
-    padding-top: 50px; /* 增加顶部内边距以将内容向下移动 */
-    box-sizing: border-box;
-}
-
-.header {
+    background-size: 100% 100%;
+    background-image: url('../../picture/building.jpg');
+    background-size: cover;
+    background-position: center;
+    #contain {
+      height: auto;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 25px;
+      border: 1px solid black;
+      background-color: rgba(255, 255, 255, 0.1) !important;
+      backdrop-filter: blur(5px);
+      box-shadow: -5px -5px 10px rgb(39, 65, 65), 5px 5px 20px aqua;
+      animation: animate 5s linear infinite;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+  }
+  
+  .header {
     margin-bottom: 20px;
-}
-
-.form {
-    background: white;
-    padding: 20px;
+    .title-container {
+        width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+      h2 {
+        color: white;
+        margin: 0;
+        text-decoration: underline;
+        cursor: pointer;
+        &:hover {
+          color: aqua;
+        }
+      }
+    }
+  }
+  
+  #content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+  }
+  
+  #left_card {
+    width: 500px;
+    h1 {
+      color: white;
+      white-space: nowrap;
+    }
+  }
+  
+  #right_card {
+    width: 400px;
+    .el-card {
+      margin: 0 45px;
+      border-radius: 25px;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+  
+  #right_card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .el-form {
+      width: 100%;
+      .form-item {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        label {
+          text-align: right;
+          padding-right: 10px;
+        }
+        input {
+          width: calc(100% - 90px);
+        }
+      }
+      input {
+        width: 80%;
+        height: 45px;
+        margin-top: 10px;
+        border: 1px solid white;
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 10px;
+        font-size: inherit;
+        padding-left: 20px;
+        outline: none;
+      }
+      .button-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: column;
+      }
+    }
+  }
+  
+  .submit-button {
+    width: 100%;
+    height: 35px;
+    margin-top: 10px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
-}
-
-.form-group {
-    margin-bottom: 15px;
-    text-align: left;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.submit-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007BFF;
+    background-color: rgba(207, 38, 38, 0.8);
     color: white;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-}
-
-.submit-button:hover {
-    background-color: #0056b3;
-}
-
-</style>
+  }
+  
+  .submit-button:hover {
+    background-color: rgba(207, 38, 38, 1);
+  }
+  </style>
+  

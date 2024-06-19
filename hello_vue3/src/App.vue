@@ -1,8 +1,8 @@
 <template>
   <div class="app">
-    <router-link to="/index/12" class="title-container">
+    <!-- <router-link to="/index/12" class="title-container">
       <h2 class="title">照片管理系统</h2>
-    </router-link>
+    </router-link> -->
     <div class="main-content">
       <RouterView></RouterView>
     </div>
@@ -57,8 +57,8 @@
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
-  background-image: url('../../picture/web2.jpg');
+  /* background-image: url('../../picture/web2.jpg');
   background-size: cover;
-  background-position: center;
+  background-position: center; */
 }
 </style>

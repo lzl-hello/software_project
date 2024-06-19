@@ -26,14 +26,15 @@ const navigateTo = (path: string) => {
 };
 </script>
 
-<style>
+
+<style scoped>
 .home {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-
+  background: #f5f5f5; /* 背景颜色 */
 }
 
 .hero-section {
@@ -41,22 +42,32 @@ const navigateTo = (path: string) => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 200px 200px;
+  padding: 60px 20px;
   text-align: center;
   border-radius: 15px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-
-  /* 设置透明度 */
-  opacity: 0.9;
+  background: #ffffff; /* 背景颜色 */
   max-width: 800px;
   margin: 20px 0;
 }
 
 .hero-content {
-  background: white;
+  background: #ffffff;
   padding: 40px;
   border-radius: 15px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.hero-content h1 {
+  margin-bottom: 20px;
+  font-size: 2.5rem; /* 标题字体大小 */
+  color: #333; /* 标题颜色 */
+}
+
+.hero-content p {
+  margin-bottom: 20px;
+  font-size: 1.25rem; /* 描述字体大小 */
+  color: #666; /* 描述颜色 */
 }
 
 .button-group {
@@ -66,3 +77,4 @@ const navigateTo = (path: string) => {
   justify-content: center;
 }
 </style>
+
