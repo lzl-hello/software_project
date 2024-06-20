@@ -11,7 +11,8 @@
       </div>
   
     <el-table :data="tableData">
-      <el-table-column prop="productName" label="照片名称" width="150"></el-table-column>
+      <!-- <el-table-column prop="productName" label="照片名称" width="150"></el-table-column> -->
+      <el-table-column prop="productName" label="照片名称" width="150" sortable></el-table-column>
       <el-table-column label="图像" width="250">
         <template v-slot="scope">
           <img :src="scope.row.productImage" width="150px" />
@@ -19,7 +20,8 @@
       </el-table-column>
       <el-table-column prop="productType" label="类型" width="140"></el-table-column>
       <el-table-column prop="productInformation" label="基本信息" width="380"></el-table-column>
-      <el-table-column prop="productTimeStamp" label="最后修改时间" width="200"></el-table-column>
+      <!-- <el-table-column prop="productTimeStamp" label="最后修改时间" width="200"></el-table-column> -->
+      <el-table-column prop="productTimeStamp" label="最后修改时间" width="200" sortable></el-table-column>
       <el-table-column prop="location" label="地点" width="120"></el-table-column>
     </el-table>
   
@@ -79,6 +81,26 @@
         console.error('搜索失败:', error);
       });
   };
+
+//   const handleSortChange = (sortInfo: { prop: string; order: string }) => {
+//   if (sortInfo.prop === 'productTimeStamp') {
+//     tableData.value.sort((a, b) => {
+//       if (sortInfo.order === 'ascending') {
+//         return new Date(a.productTimeStamp).getTime() - new Date(b.productTimeStamp).getTime();
+//       } else {
+//         return new Date(b.productTimeStamp).getTime() - new Date(a.productTimeStamp).getTime();
+//       }
+//     });
+//   } else if (sortInfo.prop === 'productName') {
+//     tableData.value.sort((a, b) => {
+//       if (sortInfo.order === 'ascending') {
+//         return a.productName.localeCompare(b.productName, 'zh-Hans-CN', { numeric: true });
+//       } else {
+//         return b.productName.localeCompare(a.productName, 'zh-Hans-CN', { numeric: true });
+//       }
+//     });
+//   }
+// };
   
   </script>
   
