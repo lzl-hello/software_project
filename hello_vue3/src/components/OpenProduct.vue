@@ -1,4 +1,9 @@
 <template>
+    <header class="header">
+      <router-link to="/index/12" class="title-container">
+        <h2 class="title">照片管理系统</h2>
+      </router-link>
+    </header>
 
     <div class="search-bar">
         <el-input v-model="searchQuery" placeholder="输入关键词搜索"></el-input>

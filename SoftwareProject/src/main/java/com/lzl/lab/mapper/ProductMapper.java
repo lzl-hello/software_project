@@ -34,12 +34,13 @@ public interface ProductMapper {
     void deleteProduct(Integer id);
 
     @Select("<script>" +
-            "SELECT * FROM product WHERE 1=1 AND permission = 1" +
+            "SELECT * FROM product WHERE 1=1 AND userId = #{userId}" +
             "<if test='query != null and query != \"\"'>" +
             " AND (productName LIKE CONCAT('%', #{query}, '%')" +
             " OR productInformation LIKE CONCAT('%', #{query}, '%')" +
-            " OR productType LIKE CONCAT('%', #{query}, '%'))" +
-            " OR DATE_FORMAT(productTimeStamp, '%Y-%m-%d %H:%i:%s') LIKE CONCAT('%', #{query}, '%')" +
+            " OR productType LIKE CONCAT('%', #{query}, '%')" +
+            " OR location LIKE CONCAT('%', #{query}, '%')" +
+            " OR DATE_FORMAT(productTimeStamp, '%Y-%m-%d %H:%i:%s') LIKE CONCAT('%', #{query}, '%'))" +
             "</if>" +
             " AND userId = #{userId}" +  // 添加查询当前用户的条件
             "</script>")
@@ -47,12 +48,13 @@ public interface ProductMapper {
 
 
     @Select("<script>" +
-            "SELECT * FROM product WHERE 1=1" +
+            "SELECT * FROM product WHERE 1=1 AND permission = 1" +
             "<if test='query != null and query != \"\"'>" +
             " AND (productName LIKE CONCAT('%', #{query}, '%')" +
             " OR productInformation LIKE CONCAT('%', #{query}, '%')" +
-            " OR productType LIKE CONCAT('%', #{query}, '%'))" +
-            " OR DATE_FORMAT(productTimeStamp, '%Y-%m-%d %H:%i:%s') LIKE CONCAT('%', #{query}, '%')" +
+            " OR productType LIKE CONCAT('%', #{query}, '%')" +
+            " OR location LIKE CONCAT('%', #{query}, '%')" +
+            " OR DATE_FORMAT(productTimeStamp, '%Y-%m-%d %H:%i:%s') LIKE CONCAT('%', #{query}, '%'))" +
             "</if>" +
             " AND permission = 1" +  // 添加查询当前用户的条件
             "</script>")

@@ -1,4 +1,9 @@
 <template>
+      <header class="header">
+        <router-link :to="{ name: '/productclassify', params: { userId: userId } }" class="title-container">  
+          <h2 class="title">照片管理系统</h2>
+        </router-link>
+      </header>
   
     <el-table :data="tableData">
       <el-table-column prop="productName" label="照片名称" width="150"></el-table-column>

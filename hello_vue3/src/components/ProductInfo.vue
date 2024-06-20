@@ -216,20 +216,16 @@ const deleteProduct = (row: Product) => {
 
 const searchProducts = () => {
   if (!searchQuery.value.trim()) {
-    ElMessage({
-      type: 'warning',
-      message: '搜索条件不能为空'
-    });
-    return;
-  }
-
-  axios.get('/api/searchProducts', { params: { userId: userId, query: searchQuery.value } })
+    fetchProducts();
+  }else{
+    axios.get('/api/searchProducts', { params: { userId: userId, query: searchQuery.value } })
     .then(response => {
       tableData.value = response.data.data;
     })
     .catch(error => {
       console.error('搜索失败:', error);
     });
+  }
 };
 
 
