@@ -5,6 +5,11 @@ import com.lzl.lab.pojo.User;
 import com.lzl.lab.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.nio.charset.StandardCharsets;
+import java.util.HexFormat;
+
 
 @RestController
 public class UserController {
@@ -15,6 +20,11 @@ public class UserController {
     @PostMapping("/register")
     public Result register(@RequestBody User user) {
         System.out.println("用户注册");
+
+        String originalPassword = user.getPassword();
+        String hashPassword = hashPassword(originalPassword);
+        user.setPassword(hashPassword);
+
         System.out.println(user);
 
         if (userService.register(user)) {
@@ -25,9 +35,30 @@ public class UserController {
 
     }
 
+    // 将哈希处理的方法单独写一个方法
+    private String hashPassword(String password) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] encodedhash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+            return bytesToHex(encodedhash);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // 将字节数组转换为16进制字符串的方法
+    private String bytesToHex(byte[] hash) {
+        return HexFormat.of().formatHex(hash);
+    }
+
     @PostMapping("/login")
     public Result login(@RequestBody User user) {
         System.out.println("用户登录：");
+
+        String inputPassword = user.getPassword();
+        String hashedInputPassword = hashPassword(inputPassword);
+        user.setPassword(hashedInputPassword);
+        
         System.out.println(user);
 
 //        User u = userService.login(user);
