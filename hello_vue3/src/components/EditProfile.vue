@@ -70,21 +70,26 @@
   
   const submitForm = async () => {
       try {
-          if (oldPassword.value !== user.value.password) {
-              ElMessage.error('旧密码错误');
-              return;
-          }
+
           await axios.put(`/api/updateUser`, null, {
               params: {
                   userId: userId,
                   username: user.value.username,
                   phonenumber: user.value.phonenumber,
+                  oldPassword: oldPassword.value,
                   newPassword: newPassword.value
               }
-          });
-  
-          ElMessage.success('个人信息已更新');
-          router.push('/');
+          }).then((result) => {
+              if (result.data.msg === "原密码错误"){
+                  ElMessage.error('原密码错误，请重试');
+              } else {
+                  ElMessage.success('更新成功');
+                  router.push('/')
+              }
+              // console.log(result.data.msg);
+
+          })
+          // router.push('/');
       } catch (error) {
           console.error('Error updating user data:', error);
           ElMessage.error('更新失败，请重试');

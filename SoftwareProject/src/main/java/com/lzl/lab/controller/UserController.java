@@ -9,6 +9,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.nio.charset.StandardCharsets;
 import java.util.HexFormat;
+import java.util.Objects;
 
 
 @RestController
@@ -58,7 +59,7 @@ public class UserController {
         String inputPassword = user.getPassword();
         String hashedInputPassword = hashPassword(inputPassword);
         user.setPassword(hashedInputPassword);
-        
+
         System.out.println(user);
 
 //        User u = userService.login(user);
@@ -85,10 +86,27 @@ public class UserController {
     }
 
     @PutMapping ("/updateUser")
-    public Result updateUser(@RequestParam Long userId, @RequestParam String username,@RequestParam String phonenumber, @RequestParam String newPassword){
+    public Result updateUser(@RequestParam Long userId, @RequestParam String username,@RequestParam String phonenumber, @RequestParam String oldPassword,@RequestParam String newPassword){
         System.out.println("更新用户信息：");
 
-        userService.updateUser(userId,username,phonenumber,newPassword);
-        return Result.success("更新用户信息成功");
+        User u = userService.getUserById(userId);
+        System.out.println(u.getPassword());
+        String hashOldPassword = hashPassword(oldPassword);
+        System.out.println(hashOldPassword);
+
+        if (!Objects.equals(u.getPassword(), hashOldPassword)) {
+            System.out.println("原密码错误");
+            return Result.error("原密码错误");
+        } else {
+            System.out.println("原密码正确");
+            String hashPassword = hashPassword(newPassword);
+            userService.updateUser(userId,username,phonenumber,hashPassword);
+            return Result.success("更新用户信息成功");
+        }
+
+//        String hashPassword = hashPassword(newPassword);
+//
+//        userService.updateUser(userId,username,phonenumber,hashPassword);
+//        return Result.success("更新用户信息成功");
     }
 }
