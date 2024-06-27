@@ -57,6 +57,7 @@ const handleSubmit = () => {
       const userId = user.userId; // 获取用户的 id
       console.log(userId); // 打印用户的 id
       ElMessage.success('登录成功');
+      
       router.push({ name: '/index', params: { userId: userId } });
     })
     .catch(error => {

@@ -60,13 +60,13 @@ public class UserController {
         String hashedInputPassword = hashPassword(inputPassword);
         user.setPassword(hashedInputPassword);
 
-        System.out.println(user);
 
 //        User u = userService.login(user);
 //        return u != null ? Result.success() : Result.error("登录失败");
         User u = userService.login(user);
         System.out.println(u);
         if (u != null) {
+            System.out.println("登录成功");
             return Result.success("登录成功", u);
         } else {
             return Result.error("登录失败");
