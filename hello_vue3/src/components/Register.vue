@@ -86,7 +86,7 @@ const handleSubmit = () => {
       router.push('/login');
     })
     .catch(error => {
-      ElMessage.error(`注册失败: ${error.response.data.msg}`);
+      ElMessage.error(`注册失败: 请确保用户名和手机号未被注册`);
     });
 };
 
