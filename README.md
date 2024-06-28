@@ -1,7 +1,8 @@
 # software_project
 
 dev08：完成了数据库数据加密等功能，进行了已知bug的修复
-
+user:
+```
 CREATE TABLE `user` (
   `userId` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '用户名',
@@ -11,7 +12,9 @@ CREATE TABLE `user` (
   UNIQUE KEY `username` (`username`) USING BTREE COMMENT '用户名唯一',
   UNIQUE KEY `phonenumber` (`phonenumber`) USING BTREE COMMENT '手机号码唯一'
 ) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
-
+```
+product:
+```
 CREATE TABLE `product` (
   `productName` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '名称',
   `productImage` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '图片',
@@ -25,3 +28,4 @@ CREATE TABLE `product` (
   PRIMARY KEY (`id`),
   KEY `userId` (`userId`)
 ) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+```
