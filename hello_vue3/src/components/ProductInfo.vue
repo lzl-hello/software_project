@@ -304,8 +304,10 @@ const handleUploadSuccess = (response: any) => {
 .photo-info {
   padding: 10px;
   flex-grow: 1; /* 使信息部分填满剩余空间 */
+  max-height: 300px;
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 0 0 8px 8px;
+  overflow-y: auto; /* 添加此行以使内容可滚动 */
 }
 
 .photo-actions {
