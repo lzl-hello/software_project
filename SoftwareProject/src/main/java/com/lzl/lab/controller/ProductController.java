@@ -132,4 +132,16 @@ public class ProductController {
             List<Product> productList = productService.listForAlbum(userId, productType);
             return Result.success(productList);
         }
+
+
+        @PostMapping("/thumb")
+        public Result thumb(@RequestParam Integer userId){
+            System.out.println("更新点赞数, " + "产品id：" + userId);
+            try {
+                productService.thumb(userId);
+                return Result.success();
+            } catch (Exception e) {
+                return Result.error("点赞失败：" + e.getMessage());
+            }
+        }
 }

@@ -59,4 +59,8 @@ public interface ProductMapper {
             " AND permission = 1" +  // 添加查询当前用户的条件
             "</script>")
     List<Product> searchAllProducts(@Param("query") String query);
+
+
+    @Update("UPDATE product SET productThumb = productThumb+1 WHERE Id = #{Id}")
+    void thumb(Integer id);
 }

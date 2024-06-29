@@ -23,6 +23,7 @@
           <p><strong>基本信息:</strong> {{ item.productInformation }}</p>
           <p><strong>最后修改时间:</strong> {{ item.productTimeStamp }}</p>
           <p><strong>地点:</strong> {{ item.location }}</p>
+          <p><strong>点赞数:</strong> {{ item.productThumb }}</p>
           <p><strong>权限:</strong> <span v-if="item.permission">公开</span><span v-else>私有</span></p>
           <!-- <div class="actions">
             <el-button type="primary" @click="editProduct(item)">编辑</el-button>
@@ -104,6 +105,7 @@ interface Product {
   productTimeStamp: string;
   location: string;
   permission: number;
+  productThumb: number;
 }
 
 const tableData = ref<Product[]>([]);
@@ -116,6 +118,7 @@ const formData = ref<Product>({
   productTimeStamp: '',
   location: '',
   permission: 0,
+  productThumb :0,
 });
 const uploadDialogVisible = ref(false);
 const searchQuery = ref('');
@@ -130,6 +133,7 @@ const showUploadDialog = () => {
     productTimeStamp: '',
     location: '',
     permission: 0,
+    productThumb :0,
   };
   uploadDialogVisible.value = true;
 };
@@ -180,7 +184,7 @@ const editProduct = (row: Product) => {
 
 const deleteProduct = (row: Product) => {
   ElMessageBox.confirm(
-    '此操作将永久删除该商品, 是否继续?',
+    '此操作将永久删除该照片, 是否继续?',
     '提示',
     {
       confirmButtonText: '确定',
@@ -200,7 +204,7 @@ const deleteProduct = (row: Product) => {
         });
       })
       .catch(error => {
-        console.error('商品删除失败:', error);
+        console.error('照片删除失败:', error);
         ElMessage({
           type: 'error',
           message: '删除失败'

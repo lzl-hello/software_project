@@ -17,4 +17,5 @@ public class Product {
     private String productTimeStamp;
     private String location;
     private Boolean permission;
+    private Integer productThumb;
 }

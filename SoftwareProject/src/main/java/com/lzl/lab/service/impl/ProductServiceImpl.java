@@ -59,4 +59,7 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> listForAlbum(Long userId, String productType) {
         return productMapper.listForAlbum(userId, productType);
     }
+
+    @Override
+    public void thumb(Integer Id){ productMapper.thumb(Id); }
 }

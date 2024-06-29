@@ -23,6 +23,13 @@
       <!-- <el-table-column prop="productTimeStamp" label="最后修改时间" width="200"></el-table-column> -->
       <el-table-column prop="productTimeStamp" label="最后修改时间" width="200" sortable></el-table-column>
       <el-table-column prop="location" label="地点" width="120"></el-table-column>
+      <el-table-column label="点赞" width="120">
+        <template v-slot="scope">
+          <el-button type="text" @click="thumbUp(scope.row)">
+            👍 {{ scope.row.productThumb }}
+          </el-button>
+        </template>
+      </el-table-column>
     </el-table>
   
     
@@ -44,6 +51,7 @@
     productTimeStamp: string;
     location: string;
     permission: number;
+    productThumb: number;
   }
   
   const tableData = ref<Product[]>([]);
@@ -56,6 +64,7 @@
     productTimeStamp:'',
     location: '',
     permission: 0,
+    productThumb: 0,
   });
   const uploadDialogVisible = ref(false);
   const searchQuery = ref('');
@@ -82,6 +91,22 @@
       });
   };
 
+  const thumbUp = (product: Product) => {
+  axios.post('/api/thumb', null, { params: { userId: product.id } })
+    .then(response => {
+      console.log('Response received:', response.data);
+      if (response.data.code === 1) { // 根据后端返回的 code 判断
+        product.productThumb += 1;
+        ElMessage.success('点赞成功');
+      } else {
+        ElMessage.error('点赞失败');
+      }
+    })
+    .catch(error => {
+      console.error('点赞失败:', error.response ? error.response.data : error.message);
+      ElMessage.error('点赞失败');
+    });
+  };
 //   const handleSortChange = (sortInfo: { prop: string; order: string }) => {
 //   if (sortInfo.prop === 'productTimeStamp') {
 //     tableData.value.sort((a, b) => {

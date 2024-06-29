@@ -20,4 +20,6 @@ public interface ProductService {
     List<Product> searchAllProducts(String query);
 
     List<Product> listForAlbum(Long userId, String productType);
+
+    void thumb(Integer id);
 }
